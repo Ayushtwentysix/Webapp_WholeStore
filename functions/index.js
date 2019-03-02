@@ -5,6 +5,8 @@ const engines = require('consolidate');
 const session = require("express-session");
  const FirebaseStore = require('connect-session-firebase')(session);
 const app = express();
+var firebase_web = require("firebase");
+
 var bodyParser =require("body-parser");
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
@@ -86,7 +88,41 @@ appNine.engine('hbs', engines.handlebars);
 appNine.set('views','./views');
 appNine.set('view engine', 'hbs');
 
-// var fs = require('file-system');
+const appTen = express();
+appTen.use(bodyParser.urlencoded({extended: true}));
+appTen.use(bodyParser.json());
+appTen.engine('hbs', engines.handlebars);
+appTen.set('views','./views');
+appTen.set('view engine', 'hbs');
+
+const appEleven = express();
+appEleven.use(bodyParser.urlencoded({extended: true}));
+appEleven.use(bodyParser.json());
+appEleven.engine('hbs', engines.handlebars);
+appEleven.set('views','./views');
+appEleven.set('view engine', 'hbs');
+
+const appTwelve = express();
+appTwelve.use(bodyParser.urlencoded({extended: true}));
+appTwelve.use(bodyParser.json());
+appTwelve.engine('hbs', engines.handlebars);
+appTwelve.set('views','./views');
+appTwelve.set('view engine', 'hbs');
+
+const appThirteen = express();
+appThirteen.use(bodyParser.urlencoded({extended: true}));
+appThirteen.use(bodyParser.json());
+appThirteen.engine('hbs', engines.handlebars);
+appThirteen.set('views','./views');
+appThirteen.set('view engine', 'hbs');
+
+const appFourteen = express();
+appFourteen.use(bodyParser.urlencoded({extended: true}));
+appFourteen.use(bodyParser.json());
+appFourteen.engine('hbs', engines.handlebars);
+appFourteen.set('views','./views');
+appFourteen.set('view engine', 'hbs');
+
 // var indexHTML = fs.readFileSync(`${__dirname}/views/home.hbs`, 'utf8');
 
 
@@ -96,9 +132,17 @@ var nodemailer = require('nodemailer');
 const firebaseApp = firebase.initializeApp(
     functions.config().firebase
 );
-
+ var config2 = {
+    apiKey: "AIzaSyA4TPdvFAbqie_t0s038Sqp4CJhRbltL8Y",
+    authDomain: "y-shopping.firebaseapp.com",
+     databaseURL: "https://y-shopping.firebaseio.com",
+    projectId: "y-shopping"
+ };
+const firebaseApp_web = firebase_web.initializeApp(config2);
 
 function Cart(oldCart) {
+      oldCart = oldCart ? oldCart : {};
+    
     this.items = oldCart.items || {};
     this.totalQty = oldCart.totalQty || 0;
     this.totalPrice = oldCart.totalPrice || 0;
@@ -109,7 +153,7 @@ function Cart(oldCart) {
             storedItem = this.items[id] = {item: item, qty: 0, price: 0};
         }
         storedItem.qty++;
-        storedItem.price = storedItem.item.price * storedItem.qty;
+        storedItem.price = storedItem.item.price;
         this.totalQty++;
         this.totalPrice += storedItem.item.price;
     };
@@ -142,13 +186,15 @@ app.get("/",(request, response) =>{
 
   getFacts().then(facts => {
       console.log("home products",facts);
-     response.render('home',{facts})
+     response.render('home-new',{facts})
         
         return null;
      
     }).catch(error => {
               console.log('error', error);
             });
+            
+
 
 //   return response.render('trial1.hbs', {info});
 });
@@ -162,11 +208,252 @@ appSeven.use(session({
       }),
       name: '__session',
       secret: 'mysupersecret',
-      resave: true,
-      saveUninitialized: true,
-      cookie: {maxAge : 10*60*1000 }
+      resave: false,
+      saveUninitialized: false,
+      cookie: {maxAge : 10*60*1000 },
+      secure: true
     }));
 appSeven.use(cookieParser('mysupersecret'));
+
+// Can I use like this with cookie parser?
+// appFour.use(cookieParser('mysupersecret'));
+
+
+
+
+
+// appTen.use(session({
+//       store: new FirebaseStore({
+//         database: firebaseApp.database()
+//       }),
+//       name: '__session',
+//       secret: 'firebaseAuth',
+//       resave: false,
+//       saveUninitialized: false,
+//       cookie: {maxAge : 10*60*1000 }
+//     }));
+// appTen.use(cookieParser('firebaseAuth'));
+
+// appSeven.all("/auth/:id", (req,res) => {
+    
+//     if(req.params.id === "login"){
+//     console.log("step 1, login url");
+//     res.render("login.hbs");
+//     }
+    
+//     else if(req.params.id === "loginPost"){
+//              var email=req.body.email ;
+//     var password =req.body.password ;
+//     console.log("step 2, login/auth url");
+//     firebaseApp_web.auth().signInWithEmailAndPassword(email, password).then((user)=>{
+//         console.log("user 2:",user);
+//         console.log("the person is signed in");
+//         res.redirect("/auth/auth-shopping-cart");
+//       req.session.user = user;
+//       console.log("req.session.user in loginPost: ",req.session.user);
+//         return res.locals.session = req.session;
+//     }).catch(function(error) {
+//   var errorCode = error.code;
+//   var errorMessage = error.message;
+//   console.log("errorCode: ",errorCode);
+//   console.log("errorMessage: ",errorMessage);
+// });
+
+//     }
+    
+//     else if(req.params.id === "auth-shopping-cart"){
+        
+//         var userAuth = firebaseApp_web.auth().currentUser;
+//         console.log("req.session.user:", req.session.user );
+//         var userSession = req.session.user ? req.session.user : {} ; 
+//         // var idUser = user.uid ? user.uid : 1 ; 
+//         console.log("idSession: ", userSession);
+//   if (userAuth){
+//       if(userSession === userAuth){
+//   console.log("user 1: ",userAuth);
+//   console.log("redirected to Cart");
+//         res.redirect('/shopping-cart');
+//   }
+//       else {
+//           console.log("redirected to login url");
+//     res.redirect("/auth/login");
+//       }
+//   } else {
+//       console.log("redirected to login url");
+//     res.redirect("/auth/login");
+//   }
+    
+// //   firebaseApp_web.auth().onAuthStateChanged(function(user) {
+// //       console.log("session in AuthState: ",req.session);
+// //       var idSession = req.session.userId ? req.session.userId : 0 ;  
+// //   if(idSession === user.uid){
+// //      console.log("redirected to Cart");
+// //         res.redirect('/shopping-cart');
+// //   }
+// //   else {
+// //       console.log("redirected to login url");
+// //     res.redirect("/auth/login");
+// //   }
+// // });
+  
+  
+//     }
+// });
+
+appSeven.get("/auth/login",(req,res) => {
+    console.log("step 1, login url");
+    res.render("login.hbs", {error: null});
+});     
+
+appSeven.post("/auth/loginPost",(req,res)=>{
+    
+                var email=req.body.email ;
+    var password =req.body.password ;
+    console.log("step 2, login/auth url");
+    firebaseApp_web.auth().signInWithEmailAndPassword(email, password).then((user)=>{
+        console.log("user 2:",user);
+        console.log("the person is signed in");
+        
+      req.session.user = JSON.stringify(user);
+      req.session.count = 0;
+      console.log("req.session.user in loginPost: ",req.session.user);
+      console.log("is mail verified",user.user.emailVerified);
+      if(user.user.emailVerified === false){
+         var err= "Email address is not verified. Check mail box.";
+          res.render("login.hbs", {error:err});
+      }
+      else {
+          res.redirect("/auth/auth-shopping-cart");
+      }
+        return  null;
+    }).catch(function(error) {
+  var errorCode = error.code; var errorMessage = error.message;
+  console.log("errorCode: ",errorCode); console.log("errorMessage: ",errorMessage);
+  var err;
+  if(errorCode === "auth/user-not-found") err = "Please Sign Up";
+  if(errorCode === "auth/invalid-password") err = "Password must be at least six characters."; 
+  if(errorCode === "auth/wrong-password") err = "The password is wrong";
+  if(errorCode === "auth/invalid-email") err= "Invalid Email";
+  res.render("login.hbs", {error: err} );
+ 
+});
+
+return res.locals.session = req.session;
+//      var email=req.body.email ;
+//     var password =req.body.password ;
+//     console.log("step 2, login/auth url")
+//     firebaseApp_web.auth().signInWithEmailAndPassword(email, password).then((user)=>{
+//         console.log("user 2:",user);
+//         console.log("the person is signed in");
+//         res.redirect("/auth-shopping-cart");
+//         return null;
+//     }).catch(function(error) {
+//   var errorCode = error.code;
+//   var errorMessage = error.message;
+//   console.log("errorCode: ",errorCode);
+//   console.log("errorMessage: ",errorMessage);
+// });
+
+})
+
+appSeven.get("/signUp", (req,res) => {
+    res.render("signup.hbs", {error: null});
+});
+
+
+appSeven.post("/signup/auth",(req,res)=>{
+    var email=req.body.email;
+    var password =req.body.password;
+    
+    firebaseApp_web.auth().createUserWithEmailAndPassword(email, password).then(function(){
+        
+        // var actionCodeSettings = {
+        //     url: "https://y-shopping.firebaseapp.com/login"
+        // }
+        
+        
+        var user = firebaseApp_web.auth().currentUser;
+                user.sendEmailVerification().then(function() {
+                console.log("email send for verification");
+                return null;
+        }).catch(function(error) {
+        console.log("error happen while sending verification mail: ",error);
+        });
+          res.redirect("/auth/login");
+      return null;  
+    }).catch(function(error) {
+
+  var errorCode = error.code; var errorMessage = error.message;
+  console.log("errorCode: ",errorCode);  console.log("errorMessage: ",errorMessage);
+      var err;
+  if(errorCode === "auth/email-already-in-use") err = "The provided email is already in use by an existing user. Please choose another";
+  if(errorCode === "auth/weak-password") err = "Password must be at least six characters." ;
+  if(errorCode === "auth/invalid-email") err = "Invalid Email.";
+  
+  res.render("login.hbs", {error: err} );
+});
+})
+
+appSeven.get("/auth/auth-shopping-cart", (req,res) => {
+    
+        
+        // var userSession = req.session.user ? req.session.user : JSON.stringify({"user":{"uid":"1"} }) ; 
+        // var idUser = user.uid ? user.uid : 1 ; 
+  if (req.session.user){
+      if(req.session.count === 0 ){
+          var userAuth = firebaseApp_web.auth().currentUser;
+          req.session.userAuth = JSON.stringify(userAuth);
+          req.session.count++;
+          res.locals.session = req.session;
+      }
+  
+      var userSession = req.session.user ? req.session.user : JSON.stringify({"user":{"uid":"1"} }) ; 
+      var userAuthjson = req.session.userAuth;
+      console.log("userAuthjson(388)---", userAuthjson);
+      if(JSON.parse(userSession).user.uid === JSON.parse(userAuthjson).uid){
+  console.log("redirected to Cart");
+        res.redirect('/shopping-cart');
+  }
+      else {
+          console.log("redirected to login url");
+    res.redirect("/auth/login");
+      }
+  } else {
+      console.log("redirected to login url");
+    res.redirect("/auth/login");
+  }
+});
+
+// appSeven.get("/auth-shopping-cart",(req,res)=>{
+//     console.log("step 3, auth-shopping-cart url");
+//     // firebaseApp_web.auth().currentUser.then((user)=> {
+//     //       console.log("user 1: ",user);
+//     //       if(user){
+//     //             console.log("redirected to Cart");
+//     //     res.redirect('/shopping-cart');
+//     //       }
+//     //       else {
+//     //           console.log("redirected to login url");
+//     // res.redirect("/login");
+//     //       }
+
+//     //     return null;
+//     // }).catch((err) => {
+//     //     console.log("the error in auth-shopping-cart url:",err);
+//     //     throw err;
+//     // });
+//         var user = firebaseApp_web.auth().currentUser;
+//   if (user){
+//   console.log("user 1: ",user);
+//   console.log("redirected to Cart");
+//         res.redirect('/shopping-cart');
+//   } else {
+//       console.log("redirected to login url");
+//     res.redirect("/login");
+//   }
+
+
+// });
 
 appSeven.get('/add-to-cart/:idp', function(req, res){
     var productTitle = req.params.idp;
@@ -183,7 +470,7 @@ appSeven.get('/add-to-cart/:idp', function(req, res){
          cart.add(snap.val(), snap.key);
         req.session.cart = cart;
         console.log(req.session.cart);
-        res.redirect('/shopping-cart');
+        res.redirect('/auth/auth-shopping-cart');
         return null;
         }
      
@@ -194,6 +481,7 @@ appSeven.get('/add-to-cart/:idp', function(req, res){
 appSeven.get('/remove/:idtitle',function(req,res){
        var productTitle = req.params.idtitle;
     var ref = firebaseApp.database().ref('products');
+    console.log("remove -- cart found ")
     var cart = new Cart(req.session.cart ? req.session.cart : {});
          ref.orderByChild('title').equalTo(productTitle).on('child_added',function(snap,err){
         if(err){
@@ -234,7 +522,7 @@ appSeven.get('/list/add-to-cart/:idp', function(req, res){
          cart.add(snap.val(), snap.key);
         req.session.cart = cart;
         console.log(req.session.cart);
-        res.redirect('/shopping-cart');
+        res.redirect('/auth/auth-shopping-cart');
         return null;
         }
      
@@ -248,12 +536,14 @@ appSeven.get('/list/add-to-cart/:idp', function(req, res){
 // });
 
 appSeven.get('/shopping-cart', function(req, res) {
-   if(!req.session.cart){
-       return res.render('cart2' ,{products:null});
-   } 
-   var cart = new Cart(req.session.cart);
-   res.render('cart2', {products: cart.generateArray(), totalPrice: cart.totalPrice} );
-   
+    console.log("step 4, shopping-cart url");
+    var cart = new Cart(req.session.cart); 
+    if(!req.session.cart){
+        console.log("session at 529:", req.session.cart);
+      return res.render('cart2' ,{products:null});
+  } 
+  console.log("session 532",req.session.cart);
+  res.render('cart2', {products: cart.generateArray(), totalPrice: cart.totalPrice} ); 
 });
 
 
@@ -295,7 +585,7 @@ appFive.get("/about_us", (req,res) =>{
     res.render("aboutUs.hbs");
 });
 
-appEight.use(cookieParser());
+
 appNine.use(cookieParser());
 
 appNine.get("/checkMail/:email", (req,res) => {
@@ -303,6 +593,7 @@ appNine.get("/checkMail/:email", (req,res) => {
     console.log("email sent for confirm:", email);
     res.render("checkMail.hbs",{email});
 });
+
 
 appEight.post('/shopping-cart/send/final',(req,res) =>{
     
@@ -393,10 +684,13 @@ var datetime = new Date();
     } else {
          console.log("Order Placed successfully,key is:"+newReceipt.key);
        var subjectname= `Receipt From WholeSale Website`;
+
+
        
        const output = `
     <h3>Receipt ID: ${newReceipt.key}</h3>
     <h3>Shipping Details:</h3>
+
     <ul>
     <li><strong>Name</strong>: ${req.body.name} </li>
     <li><strong>Company</strong>: ${req.body.company} </li>
@@ -453,99 +747,11 @@ appSix.post('/shopping-cart/send',(req,res) => {
         // }) }
     }});
 
-    
-    // for(var i=0;i<req.length;i++){
-    //     const output2 =`
-    //     <ul>
-    //     <li>Product Name: ${req.body.productName}</li>
-    //     </ul>
-    //     `    }
-    
-//     const output = `
-//     <p>You have a new contact request</p>
-//     <h3>Contact Details:</h3>
-//     <ul>
-//     <li>Name: ${req.body.name} </li>
-//     <li>Company: ${req.body.company} </li>
-//     <li>Email: ${req.body.email} </li>
-//     <li>Phone: ${req.body.phone} </li>
-  
-//     </ul>
-//     <h3> Message:</h3>
-//     <p> ${req.body.message}</p>
-    
-//     `;
-    
-    
-//     const output2 =`
-//     <p><h3>Total Cost: ${req.body.productTotal}</h3></p>
-//     `
-//     // console.log("quantity:",req.body.quantity);
-//     // console.log("type of:", typeof(req.body.quantity));
-//     // console.log("length:", req.body.quantity.length);
-    
-//     if(typeof(req.body.quantity)==='string'){
-//         content2 = '<td style=" border: 1px solid black;">'+req.body.quantity+'</td>';
-//     }
-//     else {
-//           var content2 = req.body.quantity.reduce(function(a,b){
-//         return a + '<td style=" border: 1px solid black;">'+b+'</td>';
-//     },'');
-//     }
-  
-//   if(typeof(req.body.productName)==='string'){
-//         content1 = '<td style=" border: 1px solid black;">'+req.body.productName+'</td>';
-//     }
-//     else {
-//      var content1 = req.body.productName.reduce(function(a,b){
-  
-//         return  a +'<td style=" border: 1px solid black;">'+b+'</td>';
-//     },'');
-//     }
-  
-//     if(typeof(req.body.productPrice)==='string'){
-//         content3 = '<td style=" border: 1px solid black;">'+req.body.productPrice+'</td>';
-//     }
-//     else {
-//      var content3 = req.body.productPrice.reduce(function(a,b){
-  
-//         return  a +'<td style=" border: 1px solid black;">'+b+'</td>';
-//     },'');
-//     }
-// // console.log("price type",typeof(req.body.productPrice));
-   
-//     // var content3 = req.body.productPrice.reduce(function(a,b){
-//     //     return a + '<td style=" border: 1px solid black;">'+b+'</td>';
-//     // },'');
- 
-    
-//     var transporter = nodemailer.createTransport({
-//  service: 'gmail',
-//  secure: true,
-//  auth: {
-//         user: 'gupta.ayush1997@gmail.com',
-//         pass: 'iwanttobeabankpoin2022'
-//     }
-// });
-
-// const mailOptions = {
-//   from: 'gupta.ayush1997@gmail.com', // sender address
-//   to: req.body.email, // list of receivers
-//   subject: '1st email from nodemailer', // Subject line
-//   html: output+'<div><table style=" border: 1px solid black;"><tbody><tr style=" border: 1px solid black;"><td style=" border: 1px solid black;"><strong>Product:</strong></td>'+content1+'</tr><tr style=" border: 1px solid black;"><td style=" border: 1px solid black;"><strong>Quantity:</strong></td>'+ content2+'</tr><tr style=" border: 1px solid black;"><td style=" border: 1px solid black;"><strong>Price:</strong></td>'+content3+'</tr></tbody></table>'// plain text body
-// };
-
-// transporter.sendMail(mailOptions, function (err, info) {
-//   if(err)
-//      console.log(err)
-//   else
-//      console.log(info);
-// //   res.render('home' ,{msg: "Email has been sent !"} );
-// res.redirect('/');
-//  return null;
-// });
 
 });
+
+
+    
 
 
 exports.app = functions.https.onRequest(app);
@@ -557,94 +763,10 @@ exports.appSix = functions.https.onRequest(appSix);
 exports.appSeven = functions.https.onRequest(appSeven);
 exports.appEight = functions.https.onRequest(appEight);
 exports.appNine = functions.https.onRequest(appNine);
-    // app.get("/:pname",(request, response) =>{
-//     var pname = request.params.pname;
-   
-//       getFactstwo().then(fact => {
-//           console.log("each product details",fact);
-//         response.render('productDetails',{fact});
-//         return null;
-//       }).catch(error => {
-//               console.log('error', error);
-//             });
-// });
-    
-
-// appTwo.get("/about",(request, response) =>{
-//     const infoTwo = JSON.stringify({
-//         about:'he is a good person'
-//     });
-//     return response.render('trial2.hbs', {infoTwo});
-// });
-
-// exports.app = functions.https.onRequest((req,res) => {
-    
-//     const info = JSON.stringify({
-//         name:'ayush'
-//     });
-//   return res.render('trial1.hbs', {info:info});
-// });
+// exports.appTen = functions.https.onRequest(appTen);
+// exports.appEleven = functions.https.onRequest(appEleven);
+// exports.appTwelve = functions.https.onRequest(appTwelve);
+// exports.appThirteen = functions.https.onRequest(appThirteen);
+// exports.appFourteen = functions.https.onRequest(appFourteen);
 
 
-// function getFactstwo(){
-//     var ref = firebaseApp.database().ref('products');
-//     return ref.orderByChild('title').equalTo('T-Shirt').on('child_added',data => {
-//       console.log(data.val());
-//       return data.val();
-// });
-    
-    
-// }
-// // Create and Deploy Your First Cloud Functions
-// // https://firebase.google.com/docs/functions/write-firebase-functions
-
-// app.get("/",(request, response) =>{
-//   getFacts().then(facts => {
-//       console.log("home products",facts);
-//      response.render('home',{facts})
-//         // response.render('home' , { facts });
-//         return null;
-     
-//     }).catch(error => {
-//               console.log('error', error);
-//             });
-
-// });
-
-// app.get("/:pname",(request, response) =>{
-//     var pname = request.params.pname;
-   
-//       getFactstwo().then(fact => {
-//           console.log("each product details",fact);
-//         response.render('productDetails',{fact});
-//         return null;
-//       }).catch(error => {
-//               console.log('error', error);
-//             });
-// });
-    
-
-
-
-
-// app.set('views', __dirname + '/views');
-// app.engine('hbs', hbs.renderFile);
-// app.set('view engine', 'hbs');
-// appTwo.set('views', __dirname + '/views');
-// appTwo.engine('hbs', hbs.renderFile);
-// appTwo.set('view engine', 'hbs');
-// var path = require("path");
-// app.engine('hbs', hbs({extname: 'hbs', defualtLayout : 'layout' , layoutDir: __dirname + '/views'}));
-// app.set('views', path.join(__dirname, 'views'));
-// app.set('view engine', 'hbs');
-
-
-
-
-// exports.appTwo = functions.https.onRequest((req,res) => {
-    
-//     const infoTwo = JSON.stringify({
-//         about:'he is a good person'
-//     });
-//     return res.render('trial2', {infoTwo});
-// });

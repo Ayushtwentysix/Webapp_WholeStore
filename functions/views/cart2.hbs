@@ -6,6 +6,7 @@
   
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Comfortaa:300,400,700" rel="stylesheet">
        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -23,6 +24,8 @@
 
 </style> 
     <style>
+    
+    
       #uploader {
         appearance: none;
         width: 50%;
@@ -37,7 +40,7 @@
 body{
   color:#485e74;
   line-height:1.6;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Comfortaa', cursive;
   padding:1em;
 }
 
@@ -165,27 +168,27 @@ ul{
 $(".button-collapse").sideNav();
 </script> 
 {{# if products }}
-
+<div class="ui container">
 <div class="ui three steps">
   <div class="active step">
     <i class="edit icon"></i>
     <div class="content">
-      <div class="title">Quantity Details</div>
-      <div class="description">Enter Quantity for products</div>
+      <div class="title" style="font-family: 'Comfortaa', cursive;">Quantity Details</div>
+      <div class="description" style="font-family: 'Comfortaa', cursive;">Enter Quantity for products</div>
     </div>
   </div>
   <div class="disabled step">
     <i class="payment icon"></i>
     <div class="content">
-      <div class="title">Billing & Confirmation</div>
-            <div class="description">Enter billing information</div>
+      <div class="title" style="font-family: 'Comfortaa', cursive;">Billing & Confirmation</div>
+            <div class="description" style="font-family: 'Comfortaa', cursive;">Enter billing information</div>
     </div>
   </div>
   <div class="disabled step">
     <i class="envelope icon"></i>
     <div class="content">
-      <div class="title">Check Mail</div>
-      <div class="description">See mail inbox for receipt</div>
+      <div class="title" style="font-family: 'Comfortaa', cursive;">Check Mail</div>
+      <div class="description" style="font-family: 'Comfortaa', cursive;">See mail inbox for receipt</div>
     </div>
   </div>
 </div>
@@ -197,24 +200,24 @@ $(".button-collapse").sideNav();
     <div class="value"  style="color:lightseagreen;">
       <i class="shop icon"></i> 100+
     </div>
-    <div class="label"  style="color:orange;">
+    <div class="label"  style="color:orange; font-family: 'Comfortaa', cursive;">
       Items Available
     </div>
   </div>
   <div class="content">
     <div class="header">
-      <center style="font-size:1.6em; color:crimson" >Interested in more items?</center>
+      <center style="font-size:1.6em; color:crimson; font-family: 'Comfortaa', cursive;">Interested in more items?</center>
     </div>
           <a href="/" class="ui animated fade huge right floated button" tabindex="0" style="margin-top:20px; color:green;">
-  <div class="visible content">Shop Now</div>
+  <div class="visible content" style="font-family: 'Comfortaa', cursive;">Shop Now</div>
   <div class="hidden content">
     <i class="shop icon"></i>
   </div>
 </a>
   </div>
 </div>
-<div class="ui container">
-<h1 style="color:deeppink;">Shopping Cart</h1>
+
+<h1 style="color:deeppink; font-family: 'Comfortaa', cursive;">Shopping Cart</h1>
   <div class="ui segment">
   <div class="ui stackable fluid one column grid">
 
@@ -228,9 +231,9 @@ $(".button-collapse").sideNav();
              {{# each products }}
     <div class="item">
     <div class="content">
-      <a href="/select/:pname" class="header" style="font-size:1.3em;">{{this.item.title}}</a>
+      <a href="/select/{{this.item.title}}" class="header" style="font-size:1.3em; font-family: 'Comfortaa', cursive;">{{this.item.title}}</a>
       <div class="meta">
-        <span>Price: ${{this.price}}</span>
+        <span style="font-family: 'Comfortaa', cursive;">Price: ${{this.price}}</span>
       </div>
       <div class="description">
     <div class="ui input">
@@ -247,12 +250,13 @@ $(".button-collapse").sideNav();
   <div class="ui basic centered label">
     Items
   </div>
+
 </div>
       </div>
       <div class="extra">
-         <a href="/remove/{{this.item.title}}" class="ui animated fade large right floated button" tabindex="0" style="margin-top:10px; color: red;">
+         <a href="/remove/{{this.item.title}}" class="ui animated fade large floated button" tabindex="0" style="margin-top:10px; color: red;">
   <div class="visible content"> <i class="material-icons">delete</i></div>
-  <div class="hidden content">
+  <div class="hidden content" style="font-family: 'Comfortaa', cursive;">
     Remove
     </div>
   </a>
@@ -268,10 +272,10 @@ $(".button-collapse").sideNav();
 {{!--   <i class="right arrow icon"></i>--}}
 {{!--  </div>--}}
 {{!--</div>--}}
-<button class="ui primary button" type="submit">
+<button class="ui primary button" type="submit" style="font-family: 'Comfortaa', cursive;">
   Proceed
 </button>
-<button class="ui button" type="reset">
+<button class="ui button" type="reset" style="font-family: 'Comfortaa', cursive;" >
   Clear
 </button>
 </form> 
@@ -310,3 +314,4 @@ $(".button-collapse").sideNav();
 
 </body>
 </html>
+
