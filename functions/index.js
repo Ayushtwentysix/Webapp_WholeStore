@@ -133,10 +133,10 @@ const firebaseApp = firebase.initializeApp(
     functions.config().firebase
 );
  var config2 = {
-    apiKey: "AIzaSyA4TPdvFAbqie_t0s038Sqp4CJhRbltL8Y",
-    authDomain: "y-shopping.firebaseapp.com",
-     databaseURL: "https://y-shopping.firebaseio.com",
-    projectId: "y-shopping"
+    apiKey: "",
+    authDomain: "",
+     databaseURL: "",
+    projectId: ""
  };
 const firebaseApp_web = firebase_web.initializeApp(config2);
 
