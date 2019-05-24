@@ -16,6 +16,7 @@ app.use(bodyParser.json());
 app.engine('hbs', engines.handlebars);
 app.set('views','./views');
 app.set('view engine', 'hbs');
+app.enable('view cache');
 var handlebars = require('handlebars');
 // var helpers = require('handlebars-helpers');
 // var helpers = require('template-helpers');
@@ -35,6 +36,7 @@ appTwo.use(bodyParser.json());
 appTwo.engine('hbs', engines.handlebars);
 appTwo.set('views','./views');
 appTwo.set('view engine', 'hbs');
+appTwo.enable('view cache');
 
 const appThree = express();
 appThree.use(bodyParser.urlencoded({extended: true}));
@@ -136,7 +138,8 @@ const firebaseApp = firebase.initializeApp(
     apiKey: "AIzaSyA4TPdvFAbqie_t0s038Sqp4CJhRbltL8Y",
     authDomain: "y-shopping.firebaseapp.com",
      databaseURL: "https://y-shopping.firebaseio.com",
-    projectId: "y-shopping"
+    projectId: "y-shopping",
+    appId: "1:911282489225:web:3fee7dd0aea858df"
  };
 const firebaseApp_web = firebase_web.initializeApp(config2);
 
@@ -175,8 +178,8 @@ function Cart(oldCart) {
 
 
 
-app.get("/",(request, response) =>{
-    
+app.get("/",(request, response) =>{ 
+    console.log("MODE:",process.env.NODE_ENV);
     function getFacts(){
     var ref = firebaseApp.database().ref('products');
     return ref.once('value').then(snap => snap.val());
@@ -751,6 +754,29 @@ appSix.post('/shopping-cart/send',(req,res) => {
 });
 
 
+appSeven.get('/upload',(req,res)=>{
+    res.render('productDetails.hbs');
+});
+
+appSeven.post('/upload',(req,res)=>{
+    
+    	var ref = firebaseApp.database().ref('sellers');
+var sellerObj = ref.push({
+Url: req.body.url,
+Item: req.body.item,
+ImageScale: req.body.ImageScale,
+BodyPart: req.body.BodyPart
+});
+    var sellerID = sellerObj.key;
+    console.log("sellerID",sellerID);
+    res.redirect("/seller-info/"+sellerID);
+});
+
+appSeven.get("/seller-info/:sellerID",(req,res)=>{
+    var sellerID = req.params.sellerID;
+    var url= 'https://gotrybuy.com/sellers/'+sellerID;
+    res.render("seller_info.hbs",{sellerID:sellerID, url:url});
+});
     
 
 
