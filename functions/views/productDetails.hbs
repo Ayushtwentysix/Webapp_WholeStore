@@ -4,206 +4,70 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>{{fact.title}}</title>
+  <title>{{Testing}}</title>
   {{!--<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />--}}
   {{!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.css" />--}}
         {{!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">--}}
-           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
-     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-       <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+{{!--           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">--}}
+{{!--     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>--}}
+{{!--       <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>--}}
+{{!--  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">--}}
 
-  	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.4/semantic.min.css" type="text/css">
+{{!--  	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.4/semantic.min.css" type="text/css">--}}
    {{!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" async></script> --}}
   
 
-<style>
-    #uploader {
-        appearance: none;
-        width: 50%;
-        margin-bottom: 10px;
-    }
-    
-    
-    *{
-  box-sizing: border-box;
-}
 
-body{
-  color:#485e74;
-  line-height:1.6;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  padding:1em;
-}
+{{!--</head>--}}
+{{!--<body>--}}
 
-.container{
-  max-width:1170px;
-  margin-left:auto;
-  margin-right:auto;
-  padding:1em;
-}
-
-ul{
-  list-style: none;
-  padding:0;
-}
-
-.brand{
-  text-align: center;
-}
-
-.brand span{
-  color:#fff;
-}
-
-.wrapper{
-  box-shadow: 0 0 20px 0 rgba(72,94,116,0.7);
-}
-
-.wrapper > *{
-  padding: 1em;
-}
-
-.company-info{
-  background:#c9e6ff;
-}
-
-.company-info h3, .company-info ul{
-  text-align: center;
-  margin:0 0 1rem 0;
-}
-
-.contact{
-  background:#f9feff;
-}
-
-/* FORM STYLES */
-.contact form{
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap:20px;
-}
-
-.contact form label{
-  display:block;
-}
-
-.contact form p{
-  margin:0;
-}
-
-.contact form .full{
-  grid-column: 1 / 3;
-}
-
-.contact form button, .contact form input, .contact form textarea{
-  width:100%;
-  padding:1em;
-  border:1px solid #c9e6ff;
-}
-
-.contact form button{
-  background:#c9e6ff;
-  border:0;
-  text-transform: uppercase;
-}
-
-.contact form button:hover,.contact form button:focus{
-  background:#92bde7;
-  color:#fff;
-  outline:0;
-  transition: background-color 2s ease-out;
-}
-
-/* LARGE SCREENS */
-@media(min-width:700px){
-  .wrapper{
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-  }
-
-  .wrapper > *{
-    padding:2em;
-  }
-
-  .company-info h3, .company-info ul, .brand{
-    text-align: left;
-  }
-}
-    
-</style>
-<style type="text/css">
-.nav-wrapper  {
-    background-color: white !important;
-    font-size: 14px;
-    font-weight: bold;
-  }
-@media all and (max-width: 640px) {
-  
-  .ui-card {
-    margin-top: 50px;
-  }
-  
-   .fixed-action-btn{
-   margin-bottom:70px;
- }
-}
-
-
-</style>
-
-
-</head>
-<body>
-
-  <nav class="nav-extended  z-depth-0">
-    <div class="nav-wrapper"  style="padding-bottom: 100px;">
-        <div id="logo">
-                  <a href="#" class="center brand-logo"  style="color: black; margin-top: 25px;">{{fact.title}}</a>
-        </div>
-      <a href="#" data-activates="mobile-demo" class="button-collapse" style="margin-top: 25px;"><i class="material-icons large cyan-text text-darken-4">menu</i></a>
-      <ul id="nav-mobile" class="right hide-on-med-and-down" style="margin-right:110px;">
-        <li><a href="/contact_us" style="color: black; margin-top: 25px;">Contact Us</a></li>
-        <li><a href="/about_us" style="color: black; margin-top: 25px;">About Us</a></li>
+{{!--  <nav class="nav-extended  z-depth-0">--}}
+{{!--    <div class="nav-wrapper"  style="padding-bottom: 100px;">--}}
+{{!--        <div id="logo">--}}
+{{!--                  <a href="#" class="center brand-logo"  style="color: black; margin-top: 25px;">{{fact.title}}</a>--}}
+{{!--        </div>--}}
+{{!--      <a href="#" data-activates="mobile-demo" class="button-collapse" style="margin-top: 25px;"><i class="material-icons large cyan-text text-darken-4">menu</i></a>--}}
+{{!--      <ul id="nav-mobile" class="right hide-on-med-and-down" style="margin-right:110px;">--}}
+{{!--        <li><a href="/contact_us" style="color: black; margin-top: 25px;">Contact Us</a></li>--}}
+{{!--        <li><a href="/about_us" style="color: black; margin-top: 25px;">About Us</a></li>--}}
         
         
-      </ul>
-      <ul class="side-nav" id="mobile-demo">
-        <li class="active"><a href="/shopping-cart">Cart</a></li>
-        <li><a href="/contact_us">Contact Us</a></li>
-        <li><a href="/about_us">About Us</a></li>
-      </ul>
-    </div>
-</nav>
+{{!--      </ul>--}}
+{{!--      <ul class="side-nav" id="mobile-demo">--}}
+{{!--        <li class="active"><a href="/shopping-cart">Cart</a></li>--}}
+{{!--        <li><a href="/contact_us">Contact Us</a></li>--}}
+{{!--        <li><a href="/about_us">About Us</a></li>--}}
+{{!--      </ul>--}}
+{{!--    </div>--}}
+{{!--</nav>--}}
 
-<script>
-$(".button-collapse").sideNav();
-</script>
+{{!--$(".button-collapse").sideNav();--}}
+{{!--</script>--}}
 
-<div class="container">
-<div class="ui stackable two column centered grid">
+{{!--<div class="container">--}}
+{{!--<div class="ui stackable two column centered grid">--}}
    
      
      
-    <div class="column">
-    <div class="ui items">
+{{!--    <div class="column">--}}
+{{!--    <div class="ui items">--}}
  
- <div class="item" style="margin-top:50px;">
-    <div class="ui circular image">
-      <img src="{{fact.img}}">
-    </div>
-    <div class="content">
-      <div class="header">
-        <div class="ui tag labels">
-          <span class="ui label">${{fact.price}}</span>
-        </div>
-        </div>
-      <div class="meta">
-        <span>{{fact.body}}</span>
-      </div>
+{{!-- <div class="item" style="margin-top:50px;">--}}
+{{!--    <div class="ui circular image">--}}
+{{!--      <img src="{{fact.img}}">--}}
+{{!--    </div>--}}
+{{!--    <div class="content">--}}
+{{!--      <div class="header">--}}
+{{!--        <div class="ui tag labels">--}}
+{{!--          <span class="ui label">${{fact.price}}</span>--}}
+{{!--        </div>--}}
+{{!--        </div>--}}
+{{!--      <div class="meta">--}}
+{{!--        <span>{{fact.body}}</span>--}}
+{{!--      </div>--}}
      
-    </div>
-  </div>
+{{!--    </div>--}}
+{{!--  </div>--}}
       
 {{!--        <div class="ui-card">--}}
 {{!--<div class="ui fluid card">--}}
@@ -224,27 +88,27 @@ $(".button-collapse").sideNav();
 {{!--</div>--}}
 {{!--</div>--}}
 
-<a href="/list/add-to-cart/{{fact.title}}" class="ui animated fade fluid teal massive button" tabindex="0" style="margin-top:43px;">
-  <div class="visible content"><i class="cart plus icon"></i></div>
-  <div class="hidden content">
-    Add to Cart
-  </div>
-</a>
+{{!--<a href="/list/add-to-cart/{{fact.title}}" class="ui animated fade fluid teal massive button" tabindex="0" style="margin-top:43px;">--}}
+{{!--  <div class="visible content"><i class="cart plus icon"></i></div>--}}
+{{!--  <div class="hidden content">--}}
+{{!--    Add to Cart--}}
+{{!--  </div>--}}
+{{!--</a>--}}
 
-    </div>
-</div>
-</div>
+{{!--    </div>--}}
+{{!--</div>--}}
+{{!--</div>--}}
 
 
-<div class="fixed-action-btn toolbar">
-    <a class="btn-floating pulse btn-large red">
-      <i class="material-icons">shopping_cart</i>
-    </a>
-    <ul>
-      <li class="waves-effect waves-light"><a href="/shopping-cart" ><i class="material-icons"></i><span id="book"><strong style="font-family: 'Montserrat', sans-serif;">Visit Cart</strong></span></a></li>
+{{!--<div class="fixed-action-btn toolbar">--}}
+{{!--    <a class="btn-floating pulse btn-large red">--}}
+{{!--      <i class="material-icons">shopping_cart</i>--}}
+{{!--    </a>--}}
+{{!--    <ul>--}}
+{{!--      <li class="waves-effect waves-light"><a href="/shopping-cart" ><i class="material-icons"></i><span id="book"><strong style="font-family: 'Montserrat', sans-serif;">Visit Cart</strong></span></a></li>--}}
     
-    </ul>
-  </div>
+{{!--    </ul>--}}
+{{!--  </div>--}}
 
 {{!--<h1></h1>--}}
 
@@ -260,19 +124,42 @@ $(".button-collapse").sideNav();
  {{!--       Choose a Logo to upload--}}
  {{!--     </div>--}}
  {{!--     <div>--}}
- {{!--       <progress value="0" max="100" id="uploader">0%</progress>--}}
  {{!--     </div>--}}
  {{!--     <div>--}}
- {{!--       <input type="file" value="upload" id="fileButton" multiple/>--}}
  {{!--     </div>--}}
  {{!--   </div>--}}
  {{!-- </div>--}}
-
-
-
-
-
 <img id="myimg"></img>
+         <progress value="0" max="100" id="uploader">0%</progress>
+        <input type="file" value="upload" id="fileButton" multiple/>
+        
+<form action="/upload" method="POST">
+  <label>Enter name</label>
+        <input type="text" placeholder="enter name..." name="name" />
+        <label>Select Item</label>
+<input list="items" name="item">
+  <datalist id="items">
+    <option value="Hat">
+    <option value="Shirt">
+    <option value="Earring">
+    <option value="Jacket">
+  </datalist>
+        <input type="text" hidden id="url" name="url"/>
+        <label>BodyPart</label>
+       <input list="BodyPart" name="BodyPart">
+  <datalist id="BodyPart">
+    <option value="Head">
+    <option value="Eyes">
+    <option value="Ear">
+    <option value="Nose">
+  </datalist> 
+  <label>ImageScale</label>
+  <input type="number" name="ImageScale" />
+<button type="submit">Submit</button> 
+</form>
+
+
+
 
 {{!--<div class="container">--}}
 {{!--    <h1 class="brand"><span>Walmart</span> Promo</h1>--}}
@@ -371,10 +258,12 @@ function uploadImageAsPromise (imageFile) {
                   var storageRef = firebase.storage().ref('multiple_uploads/'+imageFile.name);
                   var task = storageRef.put(imageFile);
                   
-                        task.snapshot.getDownloadURL().then(function(url) {
-            
+                        task.snapshot.ref.getDownloadURL().then(function(url) {
+                    
           var img = document.getElementById('myimg');
   img.src = url;
+  console.log("URL",url);
+  document.getElementById('url').value = url;
 }).catch(function(error) {
   console.log("error",error);
   
