@@ -125,9 +125,6 @@ appFourteen.engine('hbs', engines.handlebars);
 appFourteen.set('views','./views');
 appFourteen.set('view engine', 'hbs');
 
-// var indexHTML = fs.readFileSync(`${__dirname}/views/home.hbs`, 'utf8');
-
-
 
 var nodemailer = require('nodemailer');
 
@@ -135,11 +132,18 @@ const firebaseApp = firebase.initializeApp(
     functions.config().firebase
 );
  var config2 = {
+<<<<<<< HEAD
     apiKey: "AIzaSyA4TPdvFAbqie_t0s038Sqp4CJhRbltL8Y",
     authDomain: "y-shopping.firebaseapp.com",
      databaseURL: "https://y-shopping.firebaseio.com",
     projectId: "y-shopping",
     appId: "1:911282489225:web:3fee7dd0aea858df"
+=======
+    apiKey: "",  //left blank purposely
+    authDomain: "",  //left blank purposely
+     databaseURL: "",    //left blank purposely
+    projectId: "" //left blank purposely
+>>>>>>> f08344b9874829bf38b47e58392c032b6c8c51ce
  };
 const firebaseApp_web = firebase_web.initializeApp(config2);
 
@@ -178,33 +182,26 @@ function Cart(oldCart) {
 
 
 
+<<<<<<< HEAD
 app.get("/",(request, response) =>{ 
     console.log("MODE:",process.env.NODE_ENV);
+=======
+app.get("/",(request, response) =>{    
+>>>>>>> f08344b9874829bf38b47e58392c032b6c8c51ce
     function getFacts(){
     var ref = firebaseApp.database().ref('products');
-    return ref.once('value').then(snap => snap.val());
-    
+    return ref.once('value').then(snap => snap.val());   
 }
-    
-
   getFacts().then(facts => {
       console.log("home products",facts);
-     response.render('home-new',{facts})
-        
-        return null;
-     
+     response.render('home-new',{facts})       
+       return null;    
     }).catch(error => {
               console.log('error', error);
-            });
-            
-
-
-//   return response.render('trial1.hbs', {info});
+            });       
 });
 
 var cookieParser = require("cookie-parser");
-
-
 appSeven.use(session({
       store: new FirebaseStore({
         database: firebaseApp.database()
@@ -218,98 +215,12 @@ appSeven.use(session({
     }));
 appSeven.use(cookieParser('mysupersecret'));
 
-// Can I use like this with cookie parser?
-// appFour.use(cookieParser('mysupersecret'));
-
-
-
-
-
-// appTen.use(session({
-//       store: new FirebaseStore({
-//         database: firebaseApp.database()
-//       }),
-//       name: '__session',
-//       secret: 'firebaseAuth',
-//       resave: false,
-//       saveUninitialized: false,
-//       cookie: {maxAge : 10*60*1000 }
-//     }));
-// appTen.use(cookieParser('firebaseAuth'));
-
-// appSeven.all("/auth/:id", (req,res) => {
-    
-//     if(req.params.id === "login"){
-//     console.log("step 1, login url");
-//     res.render("login.hbs");
-//     }
-    
-//     else if(req.params.id === "loginPost"){
-//              var email=req.body.email ;
-//     var password =req.body.password ;
-//     console.log("step 2, login/auth url");
-//     firebaseApp_web.auth().signInWithEmailAndPassword(email, password).then((user)=>{
-//         console.log("user 2:",user);
-//         console.log("the person is signed in");
-//         res.redirect("/auth/auth-shopping-cart");
-//       req.session.user = user;
-//       console.log("req.session.user in loginPost: ",req.session.user);
-//         return res.locals.session = req.session;
-//     }).catch(function(error) {
-//   var errorCode = error.code;
-//   var errorMessage = error.message;
-//   console.log("errorCode: ",errorCode);
-//   console.log("errorMessage: ",errorMessage);
-// });
-
-//     }
-    
-//     else if(req.params.id === "auth-shopping-cart"){
-        
-//         var userAuth = firebaseApp_web.auth().currentUser;
-//         console.log("req.session.user:", req.session.user );
-//         var userSession = req.session.user ? req.session.user : {} ; 
-//         // var idUser = user.uid ? user.uid : 1 ; 
-//         console.log("idSession: ", userSession);
-//   if (userAuth){
-//       if(userSession === userAuth){
-//   console.log("user 1: ",userAuth);
-//   console.log("redirected to Cart");
-//         res.redirect('/shopping-cart');
-//   }
-//       else {
-//           console.log("redirected to login url");
-//     res.redirect("/auth/login");
-//       }
-//   } else {
-//       console.log("redirected to login url");
-//     res.redirect("/auth/login");
-//   }
-    
-// //   firebaseApp_web.auth().onAuthStateChanged(function(user) {
-// //       console.log("session in AuthState: ",req.session);
-// //       var idSession = req.session.userId ? req.session.userId : 0 ;  
-// //   if(idSession === user.uid){
-// //      console.log("redirected to Cart");
-// //         res.redirect('/shopping-cart');
-// //   }
-// //   else {
-// //       console.log("redirected to login url");
-// //     res.redirect("/auth/login");
-// //   }
-// // });
-  
-  
-//     }
-// });
-
 appSeven.get("/auth/login",(req,res) => {
     console.log("step 1, login url");
     res.render("login.hbs", {error: null});
 });     
 
-appSeven.post("/auth/loginPost",(req,res)=>{
-    
+appSeven.post("/auth/loginPost",(req,res)=>{   
                 var email=req.body.email ;
     var password =req.body.password ;
     console.log("step 2, login/auth url");
@@ -337,26 +248,9 @@ appSeven.post("/auth/loginPost",(req,res)=>{
   if(errorCode === "auth/invalid-password") err = "Password must be at least six characters."; 
   if(errorCode === "auth/wrong-password") err = "The password is wrong";
   if(errorCode === "auth/invalid-email") err= "Invalid Email";
-  res.render("login.hbs", {error: err} );
- 
+  res.render("login.hbs", {error: err} ); 
 });
-
 return res.locals.session = req.session;
-//      var email=req.body.email ;
-//     var password =req.body.password ;
-//     console.log("step 2, login/auth url")
-//     firebaseApp_web.auth().signInWithEmailAndPassword(email, password).then((user)=>{
-//         console.log("user 2:",user);
-//         console.log("the person is signed in");
-//         res.redirect("/auth-shopping-cart");
-//         return null;
-//     }).catch(function(error) {
-//   var errorCode = error.code;
-//   var errorMessage = error.message;
-//   console.log("errorCode: ",errorCode);
-//   console.log("errorMessage: ",errorMessage);
-// });
-
 })
 
 appSeven.get("/signUp", (req,res) => {
@@ -366,15 +260,8 @@ appSeven.get("/signUp", (req,res) => {
 
 appSeven.post("/signup/auth",(req,res)=>{
     var email=req.body.email;
-    var password =req.body.password;
-    
-    firebaseApp_web.auth().createUserWithEmailAndPassword(email, password).then(function(){
-        
-        // var actionCodeSettings = {
-        //     url: "https://y-shopping.firebaseapp.com/login"
-        // }
-        
-        
+    var password =req.body.password    
+    firebaseApp_web.auth().createUserWithEmailAndPassword(email, password).then(function(){        
         var user = firebaseApp_web.auth().currentUser;
                 user.sendEmailVerification().then(function() {
                 console.log("email send for verification");
@@ -385,7 +272,6 @@ appSeven.post("/signup/auth",(req,res)=>{
           res.redirect("/auth/login");
       return null;  
     }).catch(function(error) {
-
   var errorCode = error.code; var errorMessage = error.message;
   console.log("errorCode: ",errorCode);  console.log("errorMessage: ",errorMessage);
       var err;
@@ -397,11 +283,7 @@ appSeven.post("/signup/auth",(req,res)=>{
 });
 })
 
-appSeven.get("/auth/auth-shopping-cart", (req,res) => {
-    
-        
-        // var userSession = req.session.user ? req.session.user : JSON.stringify({"user":{"uid":"1"} }) ; 
-        // var idUser = user.uid ? user.uid : 1 ; 
+appSeven.get("/auth/auth-shopping-cart", (req,res) => {   
   if (req.session.user){
       if(req.session.count === 0 ){
           var userAuth = firebaseApp_web.auth().currentUser;
@@ -427,42 +309,10 @@ appSeven.get("/auth/auth-shopping-cart", (req,res) => {
   }
 });
 
-// appSeven.get("/auth-shopping-cart",(req,res)=>{
-//     console.log("step 3, auth-shopping-cart url");
-//     // firebaseApp_web.auth().currentUser.then((user)=> {
-//     //       console.log("user 1: ",user);
-//     //       if(user){
-//     //             console.log("redirected to Cart");
-//     //     res.redirect('/shopping-cart');
-//     //       }
-//     //       else {
-//     //           console.log("redirected to login url");
-//     // res.redirect("/login");
-//     //       }
-
-//     //     return null;
-//     // }).catch((err) => {
-//     //     console.log("the error in auth-shopping-cart url:",err);
-//     //     throw err;
-//     // });
-//         var user = firebaseApp_web.auth().currentUser;
-//   if (user){
-//   console.log("user 1: ",user);
-//   console.log("redirected to Cart");
-//         res.redirect('/shopping-cart');
-//   } else {
-//       console.log("redirected to login url");
-//     res.redirect("/login");
-//   }
-
-
-// });
-
 appSeven.get('/add-to-cart/:idp', function(req, res){
     var productTitle = req.params.idp;
     var ref = firebaseApp.database().ref('products');
-    var cart = new Cart(req.session.cart ? req.session.cart : {});
- 
+    var cart = new Cart(req.session.cart ? req.session.cart : {}); 
      ref.orderByChild('title').equalTo(productTitle).on('child_added',function(snap,err){
         if(err){
             console.log("error",err);
@@ -475,8 +325,7 @@ appSeven.get('/add-to-cart/:idp', function(req, res){
         console.log(req.session.cart);
         res.redirect('/auth/auth-shopping-cart');
         return null;
-        }
-     
+        }     
     });
      return res.locals.session = req.session;
 });
@@ -498,16 +347,8 @@ appSeven.get('/remove/:idtitle',function(req,res){
         req.session.cart = cart;
         res.redirect('/shopping-cart');
         return null;
-        }
-     
-    });
-        
-        
-        
-     
-        
-        
-    
+        }     
+    });        
 });
 
 appSeven.get('/list/add-to-cart/:idp', function(req, res){
@@ -528,15 +369,9 @@ appSeven.get('/list/add-to-cart/:idp', function(req, res){
         res.redirect('/auth/auth-shopping-cart');
         return null;
         }
-     
     });
      return res.locals.session = req.session;
 });
-
-// appSeven.use(function(req,res){
-//     console.log("This is session 1",req.session);
-//      res.locals.session = req.session;
-// });
 
 appSeven.get('/shopping-cart', function(req, res) {
     console.log("step 4, shopping-cart url");
@@ -548,6 +383,8 @@ appSeven.get('/shopping-cart', function(req, res) {
   console.log("session 532",req.session.cart);
   res.render('cart2', {products: cart.generateArray(), totalPrice: cart.totalPrice} ); 
 });
+
+
 
 
 appTwo.get("/select/:pname",(request, response) =>{
@@ -562,11 +399,11 @@ appTwo.get("/select/:pname",(request, response) =>{
         console.log(fact);
         response.render('productDetails',{fact});
         return null;
-        }
-        
-    });
-    
+        }        
+    });    
 });
+
+
 
 appThree.get("/categories/clothing/:type",(request,response) =>{
         var type = request.params.type;
@@ -576,13 +413,16 @@ appThree.get("/categories/clothing/:type",(request,response) =>{
         console.log(facts);
         response.render('product',{facts});
         return null;
-    });
-    
+    });    
 });
+
+
 
 appFour.get('/contact_us', (request,response) =>{
     response.render('contactUs.hbs');
 });
+
+
 
 appFive.get("/about_us", (req,res) =>{
     res.render("aboutUs.hbs");
@@ -590,7 +430,6 @@ appFive.get("/about_us", (req,res) =>{
 
 
 appNine.use(cookieParser());
-
 appNine.get("/checkMail/:email", (req,res) => {
     var email= req.params.email;
     console.log("email sent for confirm:", email);
@@ -598,12 +437,9 @@ appNine.get("/checkMail/:email", (req,res) => {
 });
 
 
+
 appEight.post('/shopping-cart/send/final',(req,res) =>{
-    
-    
-    
-   
-    
+ 
         if(typeof(req.body.pName)==='string'){
         content1 = '<td style=" border: 1px solid black; border-collapse: collapse;">'+req.body.pName+'</td>';
     }
@@ -649,8 +485,7 @@ appEight.post('/shopping-cart/send/final',(req,res) =>{
     },0);
     }
     
-     const output2 = `$${content5}`;
-        
+     const output2 = `$${content5}`;      
     var transporter = nodemailer.createTransport({
  service: 'gmail',
  secure: true,
@@ -659,11 +494,6 @@ appEight.post('/shopping-cart/send/final',(req,res) =>{
         pass: process.env.PASSWORD
     }
 });
-
-
-
-
-
 
 var datetime = new Date();
  var newReceipt = firebase.database().ref("Internal-Receipt").push();
@@ -718,39 +548,24 @@ var datetime = new Date();
          console.log(err)
          else
           console.log(info);
-        //   res.render('home' ,{msg: "Email has been sent !"} );
 });
-
 var finalEmail= (req.body.mailOne);
 res.redirect('/checkMail/'+finalEmail);
     }
   });
-
-
-
-
-
-
 });
 
 
 
 appSix.post('/shopping-cart/send',(req,res) => {
-    // var products = req.body;
     var array1 = [];
   var sum=0
     console.log("type:",typeof(req.body));
-      
-        console.log("req.body:",req.body);
+             console.log("req.body:",req.body);
     res.render("checkout.hbs",{products: req.body.products ,  
     helpers:{
         multiply: function(thing1, thing2){  return thing1*thing2; }
-        // totalP: function(a,b){ var mul = a*b; array1.push(mul); array1.map(function(val){
-        //     return sum=sum+val;
-        // }) }
     }});
-
-
 });
 
 
@@ -789,10 +604,6 @@ exports.appSix = functions.https.onRequest(appSix);
 exports.appSeven = functions.https.onRequest(appSeven);
 exports.appEight = functions.https.onRequest(appEight);
 exports.appNine = functions.https.onRequest(appNine);
-// exports.appTen = functions.https.onRequest(appTen);
-// exports.appEleven = functions.https.onRequest(appEleven);
-// exports.appTwelve = functions.https.onRequest(appTwelve);
-// exports.appThirteen = functions.https.onRequest(appThirteen);
-// exports.appFourteen = functions.https.onRequest(appFourteen);
+
 
 
